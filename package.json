@@ -1,0 +1,30 @@
+{
+  "name": "medusa-mono",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "clean": "find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' \\; && find . -name \"yarn.lock\" -delete && find . -name \"package-lock.json\" -delete",
+    "check-types": "turbo run check-types"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.6",
+    "typescript": "5.9.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@10.9.0",
+  "workspaces": [
+    "apps/*",
+    "experiments/*"
+  ],
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
