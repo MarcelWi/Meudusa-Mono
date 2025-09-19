@@ -1,25 +1,20 @@
+// routes/products._index.tsx
 import { useLoaderData } from "react-router";
+import { useQuery } from "@tanstack/react-query";
 import type { LoaderFunctionArgs } from "react-router";
+import { productsQueryOptions } from '~/lib/queries';
 import { fetchProducts } from '~/lib/api';
-import { logError, getErrorMessage } from '~/lib/error-handling';
+import { getErrorMessage } from '~/lib/error-handling';
 import { ProductGrid } from '~/components/products/ProductGrid';
 import { ProductError } from '~/components/products/ProductError';
-import type { LoaderData } from '~/lib/types';
 
+// ✅ Server lädt Daten vor
 export async function loader({ request }: LoaderFunctionArgs) {
   try {
-    console.log("Loading products from Medusa backend...");
-
-    const { products, count } = await fetchProducts();
-    console.log(`✅ Successfully loaded ${products.length} products`);
-
-    return {
-      products,
-      count
-    };
+    const data = await fetchProducts();
+    return { ...data, error: null };
   } catch (error) {
-    logError("ProductsLoader", error);
-
+    console.error('Products loader error:', error);
     return {
       products: [],
       count: 0,
@@ -29,14 +24,28 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export default function ProductsPage() {
-  const { products, error, count } = useLoaderData<LoaderData>();
+  const loaderData = useLoaderData<typeof loader>();
+
+  // ✅ Query mit Server-Daten als initialData
+  const { data } = useQuery({
+    ...productsQueryOptions(),
+    initialData: loaderData.error ? undefined : {
+      products: loaderData.products,
+      count: loaderData.count
+    },
+    staleTime: 1000 * 60 * 5,
+  });
+
+  const { products, count } = data || { products: [], count: 0 };
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6">Produkte ({count || products.length})</h1>
+      <h1 className="text-2xl font-bold mb-6">
+        Produkte ({count})
+      </h1>
 
-      {error ? (
-        <ProductError error={error} />
+      {loaderData.error ? (
+        <ProductError error={loaderData.error} />
       ) : (
         <ProductGrid products={products} />
       )}

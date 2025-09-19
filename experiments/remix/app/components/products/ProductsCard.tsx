@@ -1,4 +1,4 @@
-import { Product } from '~/lib/types';
+import type { Product } from '~/lib/types';
 import { Link } from 'react-router';
 
 interface ProductCardProps {
@@ -8,7 +8,7 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
-      <Link to={`/store/products/${product.handle}`} className="block">
+      <Link to={`/store/products/shorts`} className="block">
         <div className="p-4">
           {product.thumbnail && (
             <img

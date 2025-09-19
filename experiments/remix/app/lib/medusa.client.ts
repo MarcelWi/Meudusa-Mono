@@ -1,22 +1,24 @@
+// lib/medusa.client.ts - Minimale Konfiguration
 import Medusa from "@medusajs/js-sdk";
+import { validateConfig } from "./api/config";
 
-const MEDUSA_BACKEND_URL = import.meta.env.VITE_MEDUSA_BACKEND_URL || "http://localhost:9000";
-const PUBLISHABLE_KEY = import.meta.env.VITE_MEDUSA_PUBLISHABLE_KEY;
+const config = validateConfig();
 
-console.log("Config:", {
-  baseUrl: MEDUSA_BACKEND_URL,
-  hasKey: !!PUBLISHABLE_KEY
-});
-
+// ✅ Nur die erforderlichen Optionen
 const medusaClient = new Medusa({
-  baseUrl: MEDUSA_BACKEND_URL,
-  publishableKey: PUBLISHABLE_KEY,
-  maxRetries: 3,
-  auth: {
-    type: "jwt" as const,
-    jwtTokenStorageMethod: "memory" as const,
-  },
-  debug: import.meta.env.DEV,
+  baseUrl: config.api.baseUrl,
+  publishableKey: config.api.publishableKey,
+  debug: config.debug.enabled,
 });
-console.log('medusaClient initialized:', medusaClient);
+
+// ✅ Error Handler
+if (typeof medusaClient.on === 'function') {
+  medusaClient.on('error', (error: any) => {
+    console.error('🔥 Medusa Client Error:', error);
+  });
+}
+
+console.log('✅ Medusa client initialized');
+
 export { medusaClient };
+export { config as MEDUSA_CONFIG };
