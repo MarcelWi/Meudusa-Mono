@@ -9,6 +9,7 @@ import {
 
 import type { Route } from "../.react-router/types/app/+types/root";
 import "./app.css";
+import { Page } from "~/components/layout/Page";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -24,8 +25,6 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  console.log("Backend URL:", import.meta.env.VITE_MEDUSA_BACKEND_URL);
-  console.log("Publishable Key vorhanden:", import.meta.env.VITE_MEDUSA_PUBLISHABLE_KEY);
 
   return (
     <html lang="en">
@@ -36,7 +35,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+      <Page>
         {children}
+      </Page>
         <ScrollRestoration />
         <Scripts />
       </body>

@@ -11,14 +11,18 @@
   "dependencies": {
     "@medusajs/js-sdk": "^2.10.2",
     "@medusajs/types": "^2.10.2",
+    "@radix-ui/react-slot": "^1.2.3",
     "@react-router/node": "7.9.1",
     "@react-router/serve": "7.9.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "isbot": "^5.1.30",
     "latest": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "7.9.1",
-    "react-router-dom": "^7.9.1"
+    "react-router-dom": "^7.9.1",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@react-router/dev": "7.9.1",
