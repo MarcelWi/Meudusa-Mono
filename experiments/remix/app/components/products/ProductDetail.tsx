@@ -1,12 +1,14 @@
-import { Product } from '~/lib/types';
+import type { Product } from '~/lib/types';
 import { Button } from '~/components/ui/Button';
 import { Container } from "~/components/layout/Container";
+
 interface ProductDetailProps {
   product: Product;
 }
 
 export function ProductDetail({ product }: ProductDetailProps) {
-  const mainImage = product.images?.[0] || product.thumbnail;
+  const mainImage = product.images?.[0];
+  const imageUrl = mainImage?.url || product.thumbnail;
   const price = product.variants?.[0]?.prices?.[0]?.amount;
 
   return (
@@ -15,9 +17,9 @@ export function ProductDetail({ product }: ProductDetailProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Produktbilder */}
         <div>
-          {mainImage && (
+          {imageUrl && (
             <img
-              src={mainImage.url || product.thumbnail}
+              src={imageUrl}
               alt={product.title}
               className="w-full h-96 object-cover rounded-lg shadow-md"
             />

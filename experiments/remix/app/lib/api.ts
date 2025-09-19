@@ -1,4 +1,4 @@
-import { Product, ProductsResponse, ApiError } from './types';
+import type { Product, ProductsResponse, ApiError } from './types';
 
 const MEDUSA_BACKEND_URL = import.meta.env.VITE_MEDUSA_BACKEND_URL || "http://localhost:9000";
 const PUBLISHABLE_KEY = import.meta.env.VITE_MEDUSA_PUBLISHABLE_KEY || "";
@@ -36,26 +36,7 @@ export async function fetchProducts(): Promise<{
   count: number;
 }> {
   try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
-
-    const response = await fetch(`${MEDUSA_BACKEND_URL}/store/products`, {
-      method: "GET",
-      headers: {
-        'x-publishable-api-key': PUBLISHABLE_KEY,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      signal: controller.signal,
-    });
-
-    clearTimeout(timeoutId);
-
-    if (!response.ok) {
-      throw await handleApiError(response);
-    }
-
-    const data: ProductsResponse = await response.json();
+    const data: ProductsResponse = await medusaFetch('/store/products');
     return {
       products: data.products || [],
       count: data.count || 0

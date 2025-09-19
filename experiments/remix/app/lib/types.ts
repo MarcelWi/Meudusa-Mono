@@ -1,13 +1,3 @@
-export interface Product {
-  id: string;
-  title: string;
-  description?: string;
-  thumbnail?: string;
-  handle?: string;
-  variants?: any[];
-  price?: number;
-}
-
 export interface ProductsResponse {
   products: Product[];
   count: number;

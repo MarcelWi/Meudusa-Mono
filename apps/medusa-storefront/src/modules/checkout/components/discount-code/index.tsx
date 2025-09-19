@@ -38,6 +38,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
     if (!code) {
       return
     }
+    
     const input = document.getElementById("promotion-input") as HTMLInputElement
     const codes = promotions
       .filter((p) => p.code !== undefined)
@@ -46,12 +47,13 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
 
     try {
       await applyPromotions(codes)
-    } catch (e: any) {
-      setErrorMessage(e.message)
-    }
-
-    if (input) {
-      input.value = ""
+      // Clear the input field on successful submission
+      if (input) {
+        input.value = ""
+      }
+    } catch (e: unknown) {
+      const errorMessage = e instanceof Error ? e.message : "An error occurred while applying the promotion code"
+      setErrorMessage(errorMessage)
     }
   }
 
