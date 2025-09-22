@@ -1,4 +1,4 @@
-// routes.ts - Auth Routes hinzufügen
+// route.ts - Auth Routes hinzufügen
 import { type RouteConfig, index, route } from "@react-router/dev/routes";
 
 export default [

@@ -40,6 +40,9 @@ export default defineConfig({
     },
     {
       resolve: "@medusajs/customer"
+    },
+    {
+      resolve: "./src/modules/brand",
     }
   ]
 })

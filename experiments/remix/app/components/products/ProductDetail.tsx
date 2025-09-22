@@ -75,22 +75,22 @@ export function ProductDetail({ product }: ProductDetailProps) {
     <section className="py-8">
       <Container>
         {/* Debug Info - nur in Development */}
-        {import.meta.env.DEV && (
-          <div className="mb-4 p-4 bg-yellow-100 rounded border">
-            <h3 className="font-bold text-yellow-800">Debug Info (Development):</h3>
-            <div className="text-sm mt-2 text-yellow-700 space-y-1">
-              <p><strong>Is Client:</strong> {isClient.toString()}</p>
-              <p><strong>Product title:</strong> {product.title}</p>
-              <p><strong>Selected variant:</strong> {selectedVariant?.title}</p>
-              <p><strong>calculated_amount:</strong> {selectedVariant?.calculated_price?.calculated_amount}</p>
-              <p><strong>original_amount:</strong> {selectedVariant?.calculated_price?.original_amount}</p>
-              <p><strong>Extracted price (EUR):</strong> {price}</p>
-              <p><strong>Original price (EUR):</strong> {originalPrice}</p>
-              <p><strong>Inventory (raw):</strong> {inventoryQuantity}</p>
-              <p><strong>Inventory (formatted):</strong> {formatNumber(inventoryQuantity)}</p>
-            </div>
-          </div>
-        )}
+        {/*{import.meta.env.DEV && (*/}
+        {/*  <div className="mb-4 p-4 bg-yellow-100 rounded border">*/}
+        {/*    <h3 className="font-bold text-yellow-800">Debug Info (Development):</h3>*/}
+        {/*    <div className="text-sm mt-2 text-yellow-700 space-y-1">*/}
+        {/*      <p><strong>Is Client:</strong> {isClient.toString()}</p>*/}
+        {/*      <p><strong>Product title:</strong> {product.title}</p>*/}
+        {/*      <p><strong>Selected variant:</strong> {selectedVariant?.title}</p>*/}
+        {/*      <p><strong>calculated_amount:</strong> {selectedVariant?.calculated_price?.calculated_amount}</p>*/}
+        {/*      <p><strong>original_amount:</strong> {selectedVariant?.calculated_price?.original_amount}</p>*/}
+        {/*      <p><strong>Extracted price (EUR):</strong> {price}</p>*/}
+        {/*      <p><strong>Original price (EUR):</strong> {originalPrice}</p>*/}
+        {/*      <p><strong>Inventory (raw):</strong> {inventoryQuantity}</p>*/}
+        {/*      <p><strong>Inventory (formatted):</strong> {formatNumber(inventoryQuantity)}</p>*/}
+        {/*    </div>*/}
+        {/*  </div>*/}
+        {/*)}*/}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Produktbilder */}

@@ -7,6 +7,8 @@ import { fetchProducts } from '~/lib/api';
 import { getErrorMessage } from '~/lib/error-handling';
 import { ProductGrid } from '~/components/products/ProductGrid';
 import { ProductError } from '~/components/products/ProductError';
+import { Container } from "~/components/layout/Container";
+
 
 // ✅ Server lädt Daten vor
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -39,7 +41,7 @@ export default function ProductsPage() {
   const { products, count } = data || { products: [], count: 0 };
 
   return (
-    <div className="container mx-auto p-4">
+    <Container>
       <h1 className="text-2xl font-bold mb-6">
         Produkte ({count})
       </h1>
@@ -49,6 +51,6 @@ export default function ProductsPage() {
       ) : (
         <ProductGrid products={products} />
       )}
-    </div>
+    </Container>
   );
 }

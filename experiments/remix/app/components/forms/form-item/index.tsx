@@ -1,8 +1,9 @@
 // FormItem.tsx
-import { forwardRef } from "react"
-import { Input } from "./Input"
-import { Label } from "./Label"
-import { cn } from "~/lib/utils"
+import { forwardRef } from "react";
+
+import { Input } from "./Input";
+import { Label } from "./Label";
+import { cn } from "~/lib/utils";
 
 export interface InputWithLabelProps {
   label: string;
@@ -34,7 +35,7 @@ export const FormItem = forwardRef<HTMLInputElement, InputWithLabelProps>(
       type = "text",
       placeholder,
       disabled = false,
-      inputComponent: InputComponent = Input,       // Standardmäßig Input
+      inputComponent: InputComponent = Input, // Standardmäßig Input
       inputProps = {},
       labelProps = {},
       ...restProps
@@ -43,12 +44,10 @@ export const FormItem = forwardRef<HTMLInputElement, InputWithLabelProps>(
   ) => {
     const hasError = !!error;
     const hasHelperText = !!helperText && !hasError;
-    const describedBy = [
-      hasError ? `${id}-error` : null,
-      hasHelperText ? `${id}-helper` : null,
-    ]
-      .filter(Boolean)
-      .join(" ") || undefined;
+    const describedBy =
+      [hasError ? `${id}-error` : null, hasHelperText ? `${id}-helper` : null]
+        .filter(Boolean)
+        .join(" ") || undefined;
 
     return (
       <div className={cn("grid w-full items-center gap-2", containerClassName)}>
@@ -90,7 +89,7 @@ export const FormItem = forwardRef<HTMLInputElement, InputWithLabelProps>(
           className={cn(
             hasError && [
               "border-destructive/50 text-destructive",
-              "focus-visible:border-destructive focus-visible:ring-destructive/20"
+              "focus-visible:border-destructive focus-visible:ring-destructive/20",
             ],
             inputProps.className
           )}
@@ -115,7 +114,7 @@ export const FormItem = forwardRef<HTMLInputElement, InputWithLabelProps>(
           </p>
         )}
       </div>
-    )
+    );
   }
 );
 

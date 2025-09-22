@@ -1,4 +1,4 @@
-// vite.config.ts - Korrigiert
+// vite.config.ts
 import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
@@ -11,9 +11,8 @@ export default defineConfig({
     tsconfigPaths()
   ],
   css: {
-    postcss: false // PostCSS explizit deaktivieren
+    postcss: {}
   },
-  // ✅ Für bessere SSR + Client Hydration
   optimizeDeps: {
     include: ["@tanstack/react-query"]
   }
