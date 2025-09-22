@@ -19,6 +19,8 @@ createProductsWorkflow.hooks.productsCreated<ProductsCreatedInput, CompensationI
     const brandId = additional_data?.brand_id
     if (!brandId) return new StepResponse(undefined, undefined)
 
+    console.log("### productsCreated Hook - Linking products to brand:", brandId, products.map(p => p.id).join(", "))
+
     // Service holen und Brand validieren (Error, wenn nicht gefunden):
     const brandModuleService = container.resolve(BRAND_MODULE)
     await brandModuleService.retrieveBrand(brandId)
